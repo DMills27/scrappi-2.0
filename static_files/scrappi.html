@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Scrappi app</title>
+<link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
+<style>
+      main {
+        margin-top: 2em;
+      }
+</style>
+
+<script src="jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+// jQuery convention for running when the document has been fully loaded:
+$(document).ready(() => {
+  $('#readButton').click(() => {
+    const requestURL = 'search/' + $('#nameBox').val();
+    console.log('making ajax request to:', requestURL);
+    // From: http://learn.jquery.com/ajax/jquery-ajax-methods/
+    // Using the core $.ajax() method since it's the most flexible.
+    // ($.get() and $.getJSON() are nicer convenience functions)
+    $.ajax({
+      // all URLs are relative to http://localhost:3000/
+      url: requestURL,
+      type: 'GET',
+      dataType : 'json', // this URL returns data in JSON format
+      success: (data) => {
+        console.log('You received some data!');
+        html = '<ul>'
+        for(var i=0; i< Object.keys(data.concordance).length; i++){
+          html += '<li>' + Object.keys(data.concordance)[j] + ' : ' + Object.values(data.concordance)[j] +'</li>';
+        };
+        html += '</ul>';
+        $('#status').html(html);
+      },
+    });
+  });
+  // $('#allUsersButton').click(() => {
+  //   $.ajax({
+  //     url: 'users',
+  //     type: 'GET',
+  //     dataType : 'json',
+  //     success: (data) => {
+  //       console.log('You received some data!', data);
+  //       $('#status').html('All users: ' + data);
+  //     },
+  //   });
+  // });
+  // define a generic Ajax error handler:
+  // http://api.jquery.com/ajaxerror/
+  $(document).ajaxError(() => {
+    $('#status').html('Error: unknown ajaxError!');
+  });
+});
+</script>
+
+</head>
+<body>
+  <h1>Welcome to Scrappi</h1>
+
+  Name: <input type="text" class="form-control" id="nameBox" type="text" size="10"/>
+  <button id="readButton">Get scraped website data</button>
+
+  <hr/>
+
+  <div id="status"></div>
+</body>
+</html>
