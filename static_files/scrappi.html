@@ -27,8 +27,8 @@ $(document).ready(() => {
       success: (data) => {
         console.log('You received some data!');
         html = '<ul>'
-        for(var i=0; i< Object.keys(data.concordance).length; i++){
-          html += '<li>' + Object.keys(data.concordance)[j] + ' : ' + Object.values(data.concordance)[j] +'</li>';
+        for(var i = 0; i < Object.keys(data.concordance).length; i++){
+          html += '<li>' + Object.keys(data.concordance)[i] + ' : ' + Object.values(data.concordance)[i] +'</li>';
         };
         html += '</ul>';
         $('#status').html(html);
