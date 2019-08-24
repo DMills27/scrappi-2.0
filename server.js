@@ -9,10 +9,16 @@ app.use(express.static('static_files'));
 // To test, open this URL in your browser:
 //   http://localhost:3000/search?array=google&array=facebook
 app.get('/search/:title', (req, res) => {
-  scraper.search(req.params.title).then(SearchItems =>res.send(SearchItems));
+  scraper.scrape(req.params.title).then(SearchItems =>res.send(SearchItems));
   console.log(req.params.title);
-  // scraper2.multiSearch(req.query.array).then(SearchItems =>res.send(SearchItems));
+  // scraper.scrape(req.query.array).then(SearchItems =>res.send(SearchItems));
   // console.log(req.query.array);
+});
+
+app.get('/terms', (req, res) => {
+  //scraper2.tf(req.query.array).then(items =>res.send(items));
+  return scraper2.tf(req.query.array).then(items =>res.send(items));
+  console.log(req.query.array);
 });
 
 // start the server at URL: http://localhost:3000/

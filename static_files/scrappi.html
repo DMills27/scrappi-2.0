@@ -25,12 +25,14 @@ $(document).ready(() => {
       type: 'GET',
       dataType : 'json', // this URL returns data in JSON format
       success: (data) => {
-        console.log('You received some data!');
+        // console.log('You received some data!', data[1]);
+        html = '<p> These are the term frequencies </p>'
         html = '<ul>'
         for(var i = 0; i < Object.keys(data.concordance).length; i++){
           html += '<li>' + Object.keys(data.concordance)[i] + ' : ' + Object.values(data.concordance)[i] +'</li>';
         };
         html += '</ul>';
+
         $('#status').html(html);
       },
     });
