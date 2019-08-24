@@ -35,13 +35,13 @@ function scrape(url){
       for(var j = 0; j < conKeys.length; j++){
         tfidf.tfidfs(conKeys[j], function(k, measure){
           // console.log('Keyword ' + conKeys[j]  +' document #' + k + ' is ' + measure );
-           TfIdf[conKeys[j]] = measure;
+           tfIdf[conKeys[j]] = measure;
         });
       }
       return {
         totaltext,
         concordance,
-        TfIdf
+        tfIdf
       };
 
     });
